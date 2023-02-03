@@ -8,10 +8,14 @@ import {
   Delete,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ProgramsService } from './programs.service';
 import { CreateProgramDto } from './dto/create-program.dto';
 import { UpdateProgramDto } from './dto/update-program.dto';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/users/entities/user.entity';
 
 @Controller('programs')
 export class ProgramsController {
@@ -25,6 +29,7 @@ export class ProgramsController {
   }
   //ROUTE POUR CHERCHER TOUS LES PROGRAMMES
   @Get()
+  // @UseGuards(AuthGuard())
   findAll() {
     return this.programsService.findAll();
   }

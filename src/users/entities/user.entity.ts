@@ -47,7 +47,7 @@ export class User {
   age: string;
 
   @Column({
-    nullable: false,
+    nullable: true,
     type: 'date',
   })
   date_start: string;
@@ -57,7 +57,7 @@ export class User {
   })
   picture: string;
   @Column({
-    nullable: false,
+    nullable: true,
     type: 'varchar',
     length: 60,
   })
@@ -65,6 +65,9 @@ export class User {
 
   @ManyToOne(() => Program, (program) => program.user, { eager: true })
   program: Program;
+
+  @ManyToOne(() => Objective, (objectif) => objectif.user, { eager: true })
+  objective: Objective;
 
   @ManyToMany(() => Receipt, { eager: true })
   @JoinTable()

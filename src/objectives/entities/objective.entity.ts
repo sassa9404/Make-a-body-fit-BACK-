@@ -1,5 +1,6 @@
 import { Exercise } from 'src/exercises/entities/exercise.entity';
 import { Program } from 'src/programs/entities/program.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   Entity,
@@ -23,4 +24,7 @@ export class Objective {
 
   @ManyToMany(() => Program, { eager: false })
   program: Program[];
+
+  @OneToMany(() => User, (user) => user.objective)
+  user: User[];
 }

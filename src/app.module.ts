@@ -13,10 +13,17 @@ import { Exercise } from './exercises/entities/exercise.entity';
 import { Receipt } from './receipts/entities/receipt.entity';
 import { Objective } from './objectives/entities/objective.entity';
 import { Program } from './programs/entities/program.entity';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { AuthModule } from './auth/auth.module';
 
 dotenv.config({ path: '.env' });
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      // permet de gérer les fichiers statics (images) comme avec express.static
+      rootPath: join(__dirname, '..', 'public/assets'),
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -32,6 +39,7 @@ dotenv.config({ path: '.env' });
     ProgramsModule,
     ReceiptsModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
